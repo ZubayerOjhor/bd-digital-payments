@@ -1,0 +1,30 @@
+[project]
+name = "bd-digital-payments"
+version = "1.0.0"
+description = "Who wins digital payments in Bangladesh? MFS, internet banking, cards and agent banking from Bangladesh Bank data, with checks, a dashboard and a strategy memo"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+dependencies = ["duckdb>=1.1", "pandas>=2.2", "pypdf>=4", "playwright>=1.44"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B"]
+ignore = ["E501"]
