@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bangladesh Digital Payments</title>
+<meta name="description" content="Who wins digital payments in Bangladesh? MFS, internet banking, cards and agent banking from Bangladesh Bank data, with a strategy memo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="mark" aria-hidden="true"></div>
+    <div>
+      <div class="name">Who wins digital payments in Bangladesh</div>
+      <div class="sub" id="sub">MFS, internet banking, cards and agent banking</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center">
+    <a class="real" href="strategy_memo.pdf" target="_blank" rel="noopener" style="text-decoration:none;background:rgba(242,165,22,.16);color:#ffcf6e;border-color:rgba(242,165,22,.4)">Read the memo (PDF)</a>
+    <div class="real">Real data · Bangladesh Bank</div>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button data-tab="answer" class="on">The answer</button>
+  <button data-tab="channels">Channels</button>
+  <button data-tab="mfs">Inside MFS</button>
+  <button data-tab="banks">Bank apps</button>
+  <button data-tab="market">Providers</button>
+  <button data-tab="method">Method and sources</button>
+</nav>
+
+<main>
+<section class="page on" id="p-answer">
+  <div class="card answer">
+    <div class="q">The question</div>
+    <h2>Who wins digital payments in Bangladesh, and what should a mobile financial service do next?</h2>
+    <p id="answer-text"></p>
+  </div>
+  <div class="kpis" id="kpis"></div>
+  <div class="bets">
+    <div class="bet"><div class="n">Move 1 · Pay, don't cash out</div><h3>Make merchant payment cheaper than cash-out</h3><p id="bet1"></p>
+      <dl><dt>Risk</dt><dd>Merchants keep cashing out, so the money leaves the network anyway.</dd><dt>Watch</dt><dd>Merchant payment's share of MFS value, month by month.</dd></dl></div>
+    <div class="bet" style="border-top-color: var(--ink)"><div class="n" style="color: var(--ink)">Move 2 · Capture money at source</div><h3>Salary and remittance straight into the wallet</h3><p id="bet2"></p>
+      <dl><dt>Risk</dt><dd>Employers and remitters choose bank accounts and bank apps instead.</dd><dt>Watch</dt><dd>Salary and remittance growth against cash-in growth.</dd></dl></div>
+    <div class="bet" style="border-top-color: var(--gold)"><div class="n" style="color: #9a6400">Move 3 · Defend the base</div><h3>Act before bank apps reach the mass market</h3><p id="bet3"></p>
+      <dl><dt>Risk</dt><dd>Bank apps add wallets, QR and low fees faster than MFS adds banking.</dd><dt>Watch</dt><dd>Internet banking customers and average transaction size.</dd></dl></div>
+  </div>
+  <div class="grid g-6-6">
+    <div class="card"><div class="card-h"><h3>Value by channel, each financial year</h3><span class="hint">Tk lakh crore</span></div><div id="c-fy-small" class="chart short"></div></div>
+    <div class="card"><div class="card-h"><h3>What would change this view</h3></div>
+      <ul class="list">
+        <li><b>Product detail after February 2025 showing merchant share jumping</b> would mean MFS is already turning into a payments network.</li>
+        <li><b>Internet banking growth flattening</b> would mean FY26 was a one-off, perhaps large business transfers moving online.</li>
+        <li><b>Interoperability between banks and MFS</b> on equal terms would blur the contest; the winner is then whoever owns the customer's daily habit.</li>
+      </ul>
+      <p class="note" style="margin-top:12px">Analysis of Bangladesh Bank's public statistics. Not investment advice. Assumptions are listed under Method and sources.</p></div>
+  </div>
+</section>
+
+<section class="page" id="p-channels">
+  <div class="grid g-6-6">
+    <div class="card"><div class="card-h"><h3>Value by channel, each financial year</h3><span class="hint">Tk lakh crore, FY2014-15 to FY2025-26</span></div><div id="c-fy" class="chart tall"></div></div>
+    <div class="card"><div class="card-h"><h3>Monthly value, Tk thousand crore</h3><span class="gapnote"><i></i>Nagad not reported</span></div><div id="c-month" class="chart tall"></div></div>
+  </div>
+  <div class="card"><div class="card-h"><h3>Growth, FY2022-23 to FY2025-26</h3><span class="hint">Value and number of transactions</span></div><div class="tbl-wrap"><table class="tbl" id="t-growth"></table></div></div>
+  <p class="note">MFS growth is understated from March 2025 to February 2026, when Nagad did not report to Bangladesh Bank. Compare across those months with care.</p>
+</section>
+
+<section class="page" id="p-mfs">
+  <div class="grid g-7-5">
+    <div class="card"><div class="card-h"><h3>What MFS money is used for</h3><span class="hint">Share of MFS value by month</span></div><div id="c-mix" class="chart tall"></div></div>
+    <div class="card"><div class="card-h"><h3>Growth by product, two years</h3><span class="hint" id="growth-hint"></span></div><div id="c-pgrowth" class="chart tall"></div></div>
+  </div>
+  <div class="card"><div class="card-h"><h3>By product, three comparable years</h3><span class="hint">Tk crore and share of MFS value</span></div><div class="tbl-wrap"><table class="tbl" id="t-mix"></table></div></div>
+</section>
+
+<section class="page" id="p-banks">
+  <div class="kpis" id="bank-kpis"></div>
+  <div class="grid g-6-6">
+    <div class="card"><div class="card-h"><h3>Internet banking customers</h3><span class="hint">Million, end of each financial year</span></div><div id="c-ibcust" class="chart tall"></div></div>
+    <div class="card"><div class="card-h"><h3>Average transaction size</h3><span class="hint">Tk per transaction</span></div><div id="c-ticket" class="chart tall"></div></div>
+  </div>
+  <p class="note">A falling average with rising numbers means more, smaller payments: the pattern of retail customers, not only businesses.</p>
+</section>
+
+<section class="page" id="p-market">
+  <div class="grid g-6-6">
+    <div class="card"><div class="card-h"><h3>MFS value by provider, April to June 2026</h3><span class="hint">Tk lakh crore, from Bangladesh Bank data reported by TBS</span></div><div id="c-prov" class="chart tall"></div></div>
+    <div class="card"><h3>How concentrated the market is</h3>
+      <div class="note" style="margin-top:12px" id="prov-note"></div>
+      <ul class="list" style="margin-top:12px">
+        <li>The provider total (Tk 6.60 lakh crore) matches Bangladesh Bank's Table IIG for the same quarter within 0.4%.</li>
+        <li>Rocket and "others" are derived from the reported total and the top three's share, not reported directly.</li>
+      </ul></div>
+  </div>
+</section>
+
+<section class="page" id="p-method">
+  <div class="grid g-6-6">
+    <div class="card"><h3>Sources</h3><ul class="list" style="margin-top:10px">
+      <li><b>MFS product detail:</b> Bangladesh Bank, MFS comparative summary statements, Dec 2021 to Feb 2025. The site returns no data after Feb 2025.</li>
+      <li><b>Channel totals:</b> Bangladesh Bank, Monthly Economic Trends, Table IIG (Aug 2025 and Aug 2026 issues): annual from FY2014-15, monthly from Jul 2023 to Jun 2026.</li>
+      <li><b>Nagad's reporting gap:</b> The Financial Express and BSS reports; it is located in the data by the agent count.</li>
+      <li><b>Provider shares:</b> The Business Standard, from Bangladesh Bank's quarterly data, April to June 2026.</li></ul></div>
+    <div class="card"><h3>Data checks (all pass before export)</h3><ul class="checks" style="margin-top:10px">
+      <li>Months reported on two statement pages agree (0 disagreements).</li>
+      <li>MFS products add up to the total (within 1%, the rounding in the published lines).</li>
+      <li>The statement and Monthly Economic Trends agree on MFS value (75% of months within 0.1%).</li>
+      <li>Overlapping months agree across report issues.</li>
+      <li>Financial-year totals equal the sum of their months.</li>
+      <li>No missing months in either series.</li>
+      <li>The Nagad gap is located: MFS agents fall 23% in Mar 2025 and rise 36% in Mar 2026.</li></ul></div>
+  </div>
+  <div class="card"><h3>Limits</h3><ul class="list" style="margin-top:10px">
+    <li><b>Product detail ends in February 2025.</b> The mix after that is not public on Bangladesh Bank's site.</li>
+    <li><b>Internet banking value</b> mixes retail and business payments; the falling average size suggests more retail use, but the split is not published.</li>
+    <li><b>Cash-out to merchants</b> is part of "cash out", not "merchant payment".</li>
+  </ul></div>
+</section>
+</main>
+
+<footer class="foot"><span>Analysis by Md. Zubayer. Bangladesh Bank public statistics; code, checks and sources on GitHub.</span><span id="gen"></span></footer>
+<script src="app.js"></script>
+</body>
+</html>
