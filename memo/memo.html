@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Digital Payments: Strategy Memo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<style>
+  @page { size: A4; margin: 0; }
+  :root { --ink:#0f1b2d; --body:#33405a; --muted:#7d8aa0; --line:#dfe4ec; --accent:#0e7c66; --gold:#b57a00; --bad:#c63d3d; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Source Serif 4", Georgia, serif; color:var(--body); background:#e9ecf1; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .page { width:210mm; height:297mm; background:#fff; padding:16mm 17mm 14mm; position:relative; overflow:hidden; break-after:page; margin:0 auto 10mm; }
+  .page:last-child { break-after:auto; }
+  @media print { body { background:#fff; } .page { margin:0; } }
+  .sans, h1, h2, h3, .meta, .kicker, table, .fig-t, .foot, .box b { font-family:Inter, sans-serif; }
+  .kicker { font-size:8.5pt; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); }
+  h1 { font-size:21pt; line-height:1.15; color:var(--ink); letter-spacing:-.02em; margin:3mm 0 3mm; font-weight:800; }
+  .meta { font-size:8.5pt; color:var(--muted); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:2mm 0; display:flex; gap:7mm; white-space:nowrap; margin-bottom:5mm; }
+  .meta b { color:var(--ink); font-weight:600; }
+  h2 { font-size:11.5pt; color:var(--ink); margin:5mm 0 2mm; letter-spacing:-.01em; }
+  h3 { font-size:9.5pt; color:var(--ink); margin:3mm 0 1mm; }
+  p, li { font-size:10pt; line-height:1.5; }
+  p + p { margin-top:2mm; }
+  ul, ol { padding-left:5mm; } li { margin-bottom:1.4mm; }
+  b, strong { color:var(--ink); }
+  .bluf { background:#0f1b2d; color:#dfe6f1; border-radius:3mm; padding:5mm 6mm; margin-bottom:4mm; }
+  .bluf .kicker { color:#f2a516; }
+  .bluf p { font-size:10.5pt; margin-top:1.5mm; }
+  .bluf b { color:#fff; }
+  .nums { display:grid; grid-template-columns:repeat(4, 1fr); gap:3mm; margin:3mm 0 1mm; }
+  .num { border:1px solid var(--line); border-radius:2.5mm; padding:3mm; font-family:Inter, sans-serif; }
+  .num b { display:block; font-size:15pt; letter-spacing:-.02em; }
+  .num span { font-size:7.8pt; color:var(--body); line-height:1.35; display:block; margin-top:1mm; }
+  .num.bad b { color:var(--bad); }
+  .bets { display:grid; grid-template-columns:repeat(3, 1fr); gap:3mm; margin-top:2mm; }
+  .bet { border-top:2.5px solid var(--accent); background:#f6f8fa; padding:3mm 3.2mm; border-radius:0 0 2mm 2mm; }
+  .bet .sans { font-size:7.5pt; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); }
+  .bet h3 { margin:1mm 0 1.2mm; font-size:9.5pt; }
+  .bet p { font-size:8.8pt; line-height:1.42; }
+  .fig { margin:2mm 0 1mm; }
+  .fig-t { font-size:8.5pt; font-weight:700; color:var(--ink); }
+  .fig-s { font-size:7.8pt; color:var(--muted); font-family:Inter, sans-serif; }
+  .chart { width:100%; height:62mm; }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:5mm; }
+  table { width:100%; border-collapse:collapse; font-size:8.3pt; margin:2mm 0; }
+  th { text-align:left; color:#fff; background:var(--ink); padding:1.6mm 2mm; font-weight:600; }
+  td { padding:1.5mm 2mm; border-bottom:1px solid var(--line); vertical-align:top; color:var(--ink); }
+  .box { border:1px solid var(--line); border-left:3px solid var(--gold); padding:3mm 4mm; border-radius:0 2mm 2mm 0; margin:3mm 0; background:#fffaf0; }
+  .box p { font-size:9.3pt; }
+  .src li { font-size:8pt; line-height:1.4; margin-bottom:.8mm; word-break:break-word; }
+  .foot { position:absolute; left:17mm; right:17mm; bottom:7mm; display:flex; justify-content:space-between; font-size:7.5pt; color:var(--muted); }
+</style></head>
+<body>
+
+<section class="page">
+  <div class="kicker">Strategy memo · Digital payments, Bangladesh</div>
+  <h1>Payments are going digital. Mobile money is not, yet.</h1>
+  <div class="meta"><span><b>For</b> MFS and bank leadership teams</span><span><b>From</b> Md.&nbsp;Zubayer</span><span><b>Date</b> 15&nbsp;Nov&nbsp;2026</span><span><b>Data</b> Bangladesh Bank, FY15 to Jun&nbsp;2026</span></div>
+  <div class="bluf">
+    <div class="kicker">The question, and the answer</div>
+    <p>Who wins digital payments in Bangladesh, and what should a mobile financial service (MFS) do next?</p>
+    <p><b>MFS still owns the mass market, but it is a cash rail, and the growth in payments has moved to bank apps.</b> Internet banking grew 4.1 times in three years, to Tk 16.45 lakh crore in FY2025-26, close to MFS at Tk 21.56 lakh crore. Inside MFS, cash in and cash out grew from 58.5% to 60.6% of value. <b>An MFS that wants to keep winning has to turn its cash rail into a payments network before bank apps reach its customers.</b></p>
+  </div>
+  <h2>Four numbers that frame the decision</h2>
+  <div class="nums">
+    <div class="num"><b>4.1x</b><span>Growth of internet banking value, FY2022-23 to FY2025-26. MFS grew 1.8x</span></div>
+    <div class="num bad"><b>60.6%</b><span>Share of MFS value that is cash in or cash out, Mar 2024 to Feb 2025, up from 58.5%</span></div>
+    <div class="num"><b>4.6%</b><span>Merchant payments' share of MFS value, after growing 124% in two years</span></div>
+    <div class="num"><b>22.7m</b><span>Internet banking customers in FY2025-26, double the 11.4m a year earlier</span></div>
+  </div>
+  <h2>Recommendation for an MFS: three moves</h2>
+  <div class="bets">
+    <div class="bet"><div class="sans">1 · Pay, don't cash out</div><h3>Merchant payment cheaper than cash-out</h3>
+      <p>Merchant payments grew 124% in two years; cash-out grew 92% on a base eight times larger. Every taka cashed out leaves the network. Price and reward paying a shop above withdrawing cash.</p></div>
+    <div class="bet" style="border-top-color:var(--ink)"><div class="sans" style="color:var(--ink)">2 · Capture money at source</div><h3>Salary and remittance into the wallet</h3>
+      <p>Salary grew 62% and inward remittance 191%. Money that arrives digitally needs no agent to cash it in, and is cheaper to keep in the network.</p></div>
+    <div class="bet" style="border-top-color:#b57a00"><div class="sans" style="color:#b57a00">3 · Defend the base</div><h3>Before bank apps go mass market</h3>
+      <p>Internet banking customers doubled in one year and the average payment fell from Tk 78,372 to Tk 48,466. Banks are going retail. Add what customers want from a bank: savings, credit, transfers.</p></div>
+  </div>
+  <h2>What I am asking for</h2>
+  <ol>
+    <li><b>Set one target in value share, not users:</b> merchant payments as a share of MFS value, reported monthly next to cash-out.</li>
+    <li><b>Reprice the journey:</b> make paying a merchant cheaper and more rewarding for the customer than cashing out at an agent.</li>
+    <li><b>Sign the inflows:</b> payroll with large employers and wallet credit with remittance houses, so money starts its life digital.</li>
+  </ol>
+  <div class="foot"><span>Sources: Bangladesh Bank MFS statements and Monthly Economic Trends; TBS; FE; BSS. Full list on page 4.</span><span>1 / 4</span></div>
+</section>
+
+<section class="page">
+  <div class="kicker">What the data says</div>
+  <h2 style="margin-top:2mm">1. Bank apps are growing fastest</h2>
+  <p>Ten years ago internet banking handled Tk 0.18 lakh crore a year, an eighth of MFS. In FY2025-26 it handled Tk 16.45 lakh crore, three quarters of MFS. Most of that gap closed in the last three years: internet banking grew 4.1 times, MFS 1.8 times, cards 1.2 times, and agent banking barely moved. MFS growth is understated because Nagad did not report from March 2025 to February 2026, but the gap is far wider than Nagad's share could explain.</p>
+  <div class="fig"><div class="fig-t">Value by channel, each financial year</div><div class="fig-s">Tk lakh crore</div><div id="f-fy" class="chart" style="height:70mm"></div></div>
+  <h2>2. Inside MFS, cash still dominates</h2>
+  <p>Bangladesh Bank's product detail runs from December 2021 to February 2025. Over that time the share of MFS value that is cash in or cash out did not fall. It rose, from 58.5% to 60.6%, because cash-out grew 92% in two years. Merchant payments grew faster, 124%, but only from 3.5% of value to 4.6%. Inward remittance nearly tripled, from a tiny base. MFS is still mostly how people move cash to each other, not how they pay.</p>
+  <div class="fig"><div class="fig-t">What MFS money is used for</div><div class="fig-s">Share of MFS value by month, December 2021 to February 2025</div><div id="f-mix" class="chart" style="height:66mm"></div></div>
+  <div class="foot"><span>Digital payments in Bangladesh · Md. Zubayer</span><span>2 / 4</span></div>
+</section>
+
+<section class="page">
+  <div class="kicker">What the data says</div>
+  <h2 style="margin-top:2mm">3. Banks are going retail</h2>
+  <p>Internet banking customers doubled in FY2025-26, from 11.4 million to 22.7 million, and transactions rose from 78 million in FY2022-23 to 339 million. Meanwhile the average payment fell from Tk 78,372 in FY2023-24 to Tk 48,466. More payments, smaller payments: the pattern of retail customers, not only businesses. The average MFS transaction is Tk 2,250, so the two still serve different needs, but the overlap is growing.</p>
+  <div class="two">
+    <div class="fig"><div class="fig-t">Internet banking customers</div><div class="fig-s">Million, end of each financial year</div><div id="f-cust" class="chart"></div></div>
+    <div class="fig"><div class="fig-t">Growth by MFS product, two years</div><div class="fig-s">Mar 2022 to Feb 2023 against Mar 2024 to Feb 2025</div><div id="f-growth" class="chart"></div></div>
+  </div>
+  <h2>4. The MFS market is a near-monopoly</h2>
+  <p>In April to June 2026, bKash handled about 67% of MFS value, Nagad about 19% and Rocket about 14%; the top three handled 99.15%. The provider total, Tk 6.60 lakh crore, matches Bangladesh Bank's own monthly figures for the quarter within 0.4%. In a market this concentrated, the contest that matters is not between MFS providers. It is between MFS and the banks.</p>
+  <div class="fig"><div class="fig-t">MFS value by provider, April to June 2026</div><div class="fig-s">Tk lakh crore; Rocket and others derived from the reported total</div><div id="f-prov" class="chart" style="height:40mm"></div></div>
+  <div class="box"><p><b>A data warning.</b> Nagad did not report to Bangladesh Bank from March 2025 to February 2026. MFS agents fall 23% in March 2025 and rise 36% in March 2026, and MFS value jumps when Nagad returns. Any growth rate that crosses those months mixes market change with a reporting change. This memo compares like with like: the product mix up to February 2025, and channel growth over full years, with the caveat stated.</p></div>
+  <div class="foot"><span>Digital payments in Bangladesh · Md. Zubayer</span><span>3 / 4</span></div>
+</section>
+
+<section class="page">
+  <div class="kicker">Moves, risks and signals</div>
+  <table style="margin-top:3mm">
+    <tr><th style="width:22%">Move</th><th style="width:30%">Why the data supports it</th><th style="width:24%">Main risk</th><th>Signal to watch</th></tr>
+    <tr><td><b>1. Pay, don't cash out</b></td><td>Merchant +124% in two years, but 4.6% of value; cash-out +92% and rising as a share</td><td>Merchants cash out anyway, so money still leaves</td><td>Merchant share of MFS value, monthly</td></tr>
+    <tr><td><b>2. Capture money at source</b></td><td>Salary +62%, remittance +191%; both arrive without an agent</td><td>Employers and remitters prefer bank accounts and apps</td><td>Salary and remittance growth against cash-in</td></tr>
+    <tr><td><b>3. Defend the base</b></td><td>Internet banking customers 11.4m to 22.7m in a year; average payment down 38%</td><td>Banks add wallets and QR faster than MFS adds banking</td><td>Internet banking customers and average payment</td></tr>
+  </table>
+  <h2>What would change my mind</h2>
+  <ul>
+    <li><b>Product detail after February 2025 showing merchant share jumping</b> would mean MFS is already turning into a payments network.</li>
+    <li><b>Internet banking growth flattening in FY2026-27</b> would suggest FY2025-26 was large business transfers moving online, not retail.</li>
+    <li><b>Interoperability on equal terms</b> between banks and MFS would blur the contest; the winner is then whoever owns the daily habit.</li>
+  </ul>
+  <h2>What this analysis cannot tell you</h2>
+  <ul>
+    <li><b>The mix after February 2025.</b> Bangladesh Bank's site stops publishing MFS product detail there.</li>
+    <li><b>Retail versus business inside internet banking.</b> The falling average suggests retail growth, but the split is not published.</li>
+    <li><b>Cash-out by merchants</b> sits inside "cash out", so some merchant activity is hidden there.</li>
+    <li><b>Profitability.</b> Fees and costs by product are not public, so the moves are framed by volume, not margin.</li>
+  </ul>
+  <h2>Sources and method</h2>
+  <ul class="src">
+    <li>Bangladesh Bank, MFS comparative summary statements, Dec 2021 to Feb 2025 (bb.org.bd, Payment and Settlement Systems), read with a headless browser.</li>
+    <li>Bangladesh Bank, Monthly Economic Trends, Table IIG, Aug 2025 and Aug 2026 issues: cards, internet banking, MFS and agent banking, annual from FY2014-15 and monthly from Jul 2023.</li>
+    <li>Nagad's reporting gap: The Financial Express, "MFS growth slows amid data gaps"; BSS, "Nagad sets new record". Provider shares: The Business Standard, "bKash dominates MFS".</li>
+    <li>Seven checks must pass before any number is published, including that the two Bangladesh Bank publications agree (75% of months within 0.1%) and that every financial year equals the sum of its months.</li>
+    <li>Code, checks and dashboard: github.com/ZubayerOjhor/bd-digital-payments.</li>
+  </ul>
+  <div class="foot"><span>Analysis of public data, not investment advice.</span><span>4 / 4</span></div>
+</section>
+
+<script>
+const CH = { mfs: ["MFS", "#2a78d6"], ib: ["Internet banking", "#eb6834"], card: ["Cards", "#1baf7a"], ab: ["Agent banking", "#eda100"] };
+const ax = { axisLine: { lineStyle: { color: "#dfe4ec" } }, axisTick: { show: false }, axisLabel: { color: "#7d8aa0", fontSize: 9 }, splitLine: { lineStyle: { color: "#eef1f5" } } };
+window.ready = fetch("../dashboard/data/payments.json").then(r => r.json()).then(D => {
+  const mk = (id, opt) => echarts.init(document.getElementById(id), null, { renderer: "svg" }).setOption({ animation: false, textStyle: { fontFamily: "Inter, sans-serif" }, ...opt });
+  mk("f-fy", { grid: { left: 30, right: 110, top: 8, bottom: 20 }, xAxis: { type: "category", data: D.fy.map(r => "FY" + r.fy.slice(5)), ...ax }, yAxis: { type: "value", ...ax },
+    series: Object.entries(CH).map(([k, [n, c]]) => ({ type: "line", showSymbol: false, lineStyle: { width: k === "mfs" || k === "ib" ? 2.6 : 1.6, color: c },
+      endLabel: { show: true, formatter: p => `${n} ${p.value.toFixed(1)}`, fontSize: 8.5, color: "#0f1b2d", fontWeight: k === "ib" ? 700 : 500 }, labelLayout: { moveOverlap: "shiftY" },
+      data: D.fy.map(r => r[`${k}_v`] / 1e5) })) });
+  const G = [["Cash in and cash out", ["cash_in", "cash_out_total"], "#9aa6b8"], ["Person to person", ["p2p"], "#2a78d6"],
+             ["Payments and inflows", ["merchant", "utility", "salary", "government", "remittance"], "#1baf7a"], ["Others", ["others"], "#d5dbe5"]];
+  const months = [...new Set(D.mix.map(r => r.month))].sort();
+  mk("f-mix", { grid: { left: 34, right: 10, top: 24, bottom: 20 }, legend: { top: 0, left: 0, textStyle: { fontSize: 8.5, color: "#0f1b2d" }, itemWidth: 10, itemHeight: 8 },
+    xAxis: { type: "category", data: months, ...ax, axisLabel: { ...ax.axisLabel, formatter: v => new Date(v + "-01T00:00:00").toLocaleDateString("en-GB", { month: "short", year: "2-digit" }) } },
+    yAxis: { type: "value", max: 100, ...ax, axisLabel: { ...ax.axisLabel, formatter: "{value}%" } },
+    series: G.map(([n, k, c]) => ({ name: n, type: "line", stack: "s", areaStyle: { color: c, opacity: .92 }, lineStyle: { width: .6, color: "#fff" }, showSymbol: false, itemStyle: { color: c },
+      data: months.map(m => D.mix.filter(r => r.month === m && k.includes(r.product)).reduce((s, r) => s + r.share, 0) * 100) })) });
+  mk("f-cust", { grid: { left: 26, right: 8, top: 14, bottom: 20 }, xAxis: { type: "category", data: D.fy.map(r => "FY" + r.fy.slice(5)), ...ax, axisLabel: { ...ax.axisLabel, interval: 1 } }, yAxis: { type: "value", ...ax },
+    series: [{ type: "bar", barWidth: 10, data: D.fy.map(r => r.ib_customers / 1e6), itemStyle: { color: "#eb6834" },
+      label: { show: true, position: "top", fontSize: 7.5, color: "#0f1b2d", formatter: p => p.value.toFixed(1) } }] });
+  const L = D.meta.labels, g = Object.entries(D.headline.growth).filter(([k]) => k !== "others").sort((a, b) => a[1] - b[1]);
+  const pay = ["merchant", "utility", "salary", "government", "remittance"];
+  mk("f-growth", { grid: { left: 96, right: 34, top: 6, bottom: 20 }, xAxis: { type: "value", ...ax, axisLabel: { ...ax.axisLabel, formatter: "{value}%" } },
+    yAxis: { type: "category", data: g.map(([k]) => L[k]), ...ax, axisLabel: { color: "#0f1b2d", fontSize: 8.5 } },
+    series: [{ type: "bar", barWidth: 8, data: g.map(([k, v]) => ({ value: v * 100, itemStyle: { color: pay.includes(k) ? "#1baf7a" : k === "p2p" ? "#2a78d6" : "#9aa6b8" } })),
+      label: { show: true, position: "right", fontSize: 8, color: "#0f1b2d", formatter: p => `+${p.value.toFixed(0)}%` } }] });
+  const P = D.providers, T = P.reduce((x, r) => x + r.value_lakh_crore, 0);
+  mk("f-prov", { grid: { left: 52, right: 60, top: 4, bottom: 18 }, xAxis: { type: "value", ...ax }, yAxis: { type: "category", inverse: true, data: P.map(r => r.provider), ...ax, axisLabel: { color: "#0f1b2d", fontSize: 8.5 } },
+    series: [{ type: "bar", barWidth: 10, data: P.map(r => ({ value: r.value_lakh_crore, itemStyle: { color: r.basis === "reported" ? "#2a78d6" : "#9aa6b8" } })),
+      label: { show: true, position: "right", fontSize: 8, color: "#0f1b2d", formatter: x => `${x.value.toFixed(2)} (${Math.round(x.value / T * 100)}%)` } }] });
+  return true;
+});
+</script>
+</body></html>
